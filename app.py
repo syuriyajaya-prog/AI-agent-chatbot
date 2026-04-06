@@ -22,7 +22,7 @@ Knowledge base:
 # Configure Gemini
 genai.configure(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash-lite",
+    model_name="gemini-2.5-flash",
     system_instruction=prompt
 )
 
