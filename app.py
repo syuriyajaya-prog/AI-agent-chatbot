@@ -20,9 +20,9 @@ Knowledge base:
 """
 
 # Configure Gemini
-genai.configure(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
+genai.configure(api_key="AIzaSyAjVseWvjaUQvqd85AaHiYE1cojRODvrDI")
 model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash",
+    model_name="gemini-2.0-flash",
     system_instruction=prompt
 )
 
