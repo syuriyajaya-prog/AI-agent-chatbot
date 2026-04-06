@@ -1,13 +1,19 @@
 import streamlit as st
 import google.generativeai as genai
+from elevenlabs.client import ElevenLabs
+from elevenlabs import play
+import tempfile
+import os
 
 st.set_page_config(page_title="AutoCare Chatbot", page_icon="🚗")
 st.title("🚗 AutoCare Assistant")
 st.caption("Ask me anything about car service and maintenance!")
 
+# Load document
 with open("car_service_document.txt", "r") as f:
     dd = f.read()
 
+# System prompt
 prompt = f"""
 You are AutoCare Assistant, a friendly and professional car service customer care executive.
 Your job is to answer questions from customers about car maintenance and services.
@@ -20,13 +26,16 @@ Knowledge base:
 """
 
 # Configure Gemini
-genai.configure(api_key="AIzaSyAjVseWvjaUQvqd85AaHiYE1cojRODvrDI")
+genai.configure(api_key="YOUR_GEMINI_API_KEY_HERE")
 model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
+    model_name="gemini-2.0-flash-lite",
     system_instruction=prompt
 )
 
-# Initialize session state
+# Configure ElevenLabs
+eleven_client = ElevenLabs(api_key="YOUR_ELEVENLABS_API_KEY_HERE")
+
+# Initialize session
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -35,29 +44,38 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-# Get user input
+# User input
 user_input = st.chat_input("Type your question here...")
 
 if user_input:
-    # Show user message
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.write(user_input)
 
-    # Build history for Gemini
+    # Build history
     history = []
     for msg in st.session_state.messages[:-1]:
         role = "user" if msg["role"] == "user" else "model"
         history.append({"role": role, "parts": msg["content"]})
 
-    # Create fresh chat with history each time
+    # Get Gemini response
     chat = model.start_chat(history=history)
 
-    # Get response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             response = chat.send_message(user_input)
             reply = response.text
             st.write(reply)
+
+        # Convert reply to voice using ElevenLabs
+        with st.spinner("Generating voice..."):
+            audio = eleven_client.text_to_speech.convert(
+                voice_id="EXAVITQu4vr4xnSDxMaL",  # Sarah voice
+                text=reply,
+                model_id="eleven_multilingual_v2"
+            )
+            # Save audio and play in browser
+            audio_bytes = b"".join(audio)
+            st.audio(audio_bytes, format="audio/mpeg")
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
