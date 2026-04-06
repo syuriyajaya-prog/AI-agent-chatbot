@@ -1,20 +1,18 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import requests
-import json
 
 st.set_page_config(page_title="AutoCare Chatbot", page_icon="🚗")
 st.title("🚗 AutoCare Assistant")
 st.caption("Ask me anything about car service and maintenance!")
 
-ELEVENLABS_API_KEY = "sk_15b715984c86cc485d18ec1cc8b756ce07d626c8113e95bb"
-AGENT_ID = "agent_4001kngt35v3exhr79ea37mxggq7"
+ELEVENLABS_AGENT_ID = "agent_4001kngt35v3exhr79ea37mxggq7"
 
 with open("car_service_document.txt", "r") as f:
     dd = f.read()
 
 SYSTEM_PROMPT = f"""
-You are Maya, a friendly and professional customer care executive for AutoCare Service Center.
+You are Maya, a friendly and professional customer care executive for AutoCare Service Center in Malaysia.
 Answer questions about car service and maintenance clearly and politely.
 If not related to car service say: I can only assist with AutoCare car service questions.
 Knowledge base:
@@ -22,41 +20,31 @@ Knowledge base:
 """
 
 def get_response(user_message, history):
-    headers = {
-        "xi-api-key": ELEVENLABS_API_KEY,
-        "Content-Type": "application/json"
-    }
-    
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    messages = []
     for msg in history:
         messages.append({
             "role": msg["role"],
             "content": msg["content"]
         })
     messages.append({"role": "user", "content": user_message})
-    
+
     response = requests.post(
-        "https://api.elevenlabs.io/v1/convai/agent/chat",
-        headers=headers,
+        "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta/v1/chat/completions",
+        headers={"Content-Type": "application/json"},
         json={
-            "agent_id": AGENT_ID,
-            "messages": messages
+            "model": "HuggingFaceH4/zephyr-7b-beta",
+            "messages": [{"role": "system", "content": SYSTEM_PROMPT}] + messages,
+            "max_tokens": 500,
+            "stream": False
         }
     )
-    
     data = response.json()
-    st.write(data)  # ← this shows us exactly what ElevenLabs returns
-    
-    if "response" in data:
-        return data["response"]
-    elif "message" in data:
-        return data["message"]
-    else:
-        return "I'm sorry, I couldn't process your request. Please try again."
+    return data["choices"][0]["message"]["content"]
+
 # Voice widget
 st.subheader("🎙️ Voice Chat")
 components.html(f"""
-<elevenlabs-convai agent-id="{AGENT_ID}"></elevenlabs-convai>
+<elevenlabs-convai agent-id="{ELEVENLABS_AGENT_ID}"></elevenlabs-convai>
 <script src="https://elevenlabs.io/convai-widget/index.js" async></script>
 """, height=100)
 
@@ -81,7 +69,11 @@ if user_input:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            reply = get_response(user_input, st.session_state.messages[:-1])
-            st.write(reply)
+            try:
+                reply = get_response(user_input, st.session_state.messages[:-1])
+                st.write(reply)
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
+                reply = "Sorry, please try again."
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
