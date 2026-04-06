@@ -44,7 +44,11 @@ def get_text_response(user_message, history):
         }
     )
     data = response.json()
-    return data["choices"][0]["message"]["content"]
+    
+    if "choices" in data:
+        return data["choices"][0]["message"]["content"]
+    else:
+        return f"Error: {data}"
 
 # ================================
 # VOICE CHAT
