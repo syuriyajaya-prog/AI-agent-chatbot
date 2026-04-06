@@ -19,22 +19,21 @@ Knowledge base:
 {dd}
 """
 
-@st.cache_resource
-def load_chat():
-    client = genai.Client(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
-    chat = client.chats.create(model="gemini-2.0-flash")
-    return chat
+# Create client once
+client = genai.Client(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
 
-chat = load_chat()
-
-if "messages" not in st.session_state:
+# Store chat in session state so it persists
+if "chat" not in st.session_state:
+    st.session_state.chat = client.chats.create(model="gemini-2.0-flash")
     st.session_state.messages = []
     st.session_state.first = True
 
+# Show previous messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
+# Get user input
 user_input = st.chat_input("Type your question here...")
 
 if user_input:
@@ -49,7 +48,8 @@ if user_input:
                 st.session_state.first = False
             else:
                 full_input = user_input
-            response = chat.send_message(full_input)
+
+            response = st.session_state.chat.send_message(full_input)
             reply = response.text
             st.write(reply)
 
