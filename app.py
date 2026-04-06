@@ -1,5 +1,5 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 
 st.set_page_config(page_title="AutoCare Chatbot", page_icon="🚗")
 st.title("🚗 AutoCare Assistant")
@@ -19,16 +19,18 @@ Knowledge base:
 {dd}
 """
 
-# Create client once
-client = genai.Client(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
+# Configure Gemini
+genai.configure(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    system_instruction=prompt
+)
 
-# Store chat in session state so it persists
-if "chat" not in st.session_state:
-    st.session_state.chat = client.chats.create(model="gemini-2.0-flash")
+# Initialize session state
+if "messages" not in st.session_state:
     st.session_state.messages = []
-    st.session_state.first = True
 
-# Show previous messages
+# Show chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
@@ -37,20 +39,16 @@ for message in st.session_state.messages:
 user_input = st.chat_input("Type your question here...")
 
 if user_input:
+    # Show user message
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.write(user_input)
 
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            if st.session_state.first:
-                full_input = prompt + "\n\nCustomer question: " + user_input
-                st.session_state.first = False
-            else:
-                full_input = user_input
+    # Build history for Gemini
+    history = []
+    for msg in st.session_state.messages[:-1]:
+        role = "user" if msg["role"] == "user" else "model"
+        history.append({"role": role, "parts": msg["content"]})
 
-            response = st.session_state.chat.send_message(full_input)
-            reply = response.text
-            st.write(reply)
-
-    st.session_state.messages.append({"role": "assistant", "content": reply})
+    # Create fresh chat with history each time
+    chat = model.start_chat(hist
