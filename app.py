@@ -26,14 +26,14 @@ Knowledge base:
 """
 
 # Configure Gemini
-genai.configure(api_key="YOUR_GEMINI_API_KEY_HERE")
+genai.configure(api_key="sk_15b715984c86cc485d18ec1cc8b756ce07d626c8113e95bb")
 model = genai.GenerativeModel(
     model_name="gemini-2.0-flash-lite",
     system_instruction=prompt
 )
 
 # Configure ElevenLabs
-eleven_client = ElevenLabs(api_key="YOUR_ELEVENLABS_API_KEY_HERE")
+eleven_client = ElevenLabs(api_key="sk_15b715984c86cc485d18ec1cc8b756ce07d626c8113e95bb")
 
 # Initialize session
 if "messages" not in st.session_state:
