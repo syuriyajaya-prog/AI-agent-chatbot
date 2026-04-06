@@ -22,8 +22,6 @@ Knowledge base:
 """
 
 def get_response(user_message, history):
-    url = f"https://api.elevenlabs.io/v1/convai/conversation/get_signed_url?agent_id={AGENT_ID}"
-    
     headers = {
         "xi-api-key": ELEVENLABS_API_KEY,
         "Content-Type": "application/json"
@@ -47,6 +45,7 @@ def get_response(user_message, history):
     )
     
     data = response.json()
+    st.write(data)  # ← this shows us exactly what ElevenLabs returns
     
     if "response" in data:
         return data["response"]
@@ -54,7 +53,6 @@ def get_response(user_message, history):
         return data["message"]
     else:
         return "I'm sorry, I couldn't process your request. Please try again."
-
 # Voice widget
 st.subheader("🎙️ Voice Chat")
 components.html(f"""
