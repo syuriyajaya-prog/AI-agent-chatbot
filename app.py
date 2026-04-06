@@ -21,7 +21,7 @@ Knowledge base:
 
 @st.cache_resource
 def load_chat():
-    client = genai.Client(api_key=st.secrets["AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4"])
+    client = genai.Client(api_key="AIzaSyA_O1AF8XVd1DcFG6hh53R8euFD63WwMI4")
     chat = client.chats.create(model="gemini-2.0-flash")
     return chat
 
@@ -29,7 +29,7 @@ chat = load_chat()
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-    st.session_state.first_message = True
+    st.session_state.first = True
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -44,12 +44,11 @@ if user_input:
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            if st.session_state.first_message:
+            if st.session_state.first:
                 full_input = prompt + "\n\nCustomer question: " + user_input
-                st.session_state.first_message = False
+                st.session_state.first = False
             else:
                 full_input = user_input
-
             response = chat.send_message(full_input)
             reply = response.text
             st.write(reply)
