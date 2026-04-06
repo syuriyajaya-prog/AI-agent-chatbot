@@ -51,4 +51,13 @@ if user_input:
         history.append({"role": role, "parts": msg["content"]})
 
     # Create fresh chat with history each time
-    chat = model.start_chat(hist
+    chat = model.start_chat(history=history)
+
+    # Get response
+    with st.chat_message("assistant"):
+        with st.spinner("Thinking..."):
+            response = chat.send_message(user_input)
+            reply = response.text
+            st.write(reply)
+
+    st.session_state.messages.append({"role": "assistant", "content": reply})
