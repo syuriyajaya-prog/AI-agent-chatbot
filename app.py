@@ -25,12 +25,6 @@ Knowledge base:
 {dd}
 """
 
-# Configure Gemini
-genai.configure(api_key="sk_15b715984c86cc485d18ec1cc8b756ce07d626c8113e95bb")
-model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash-lite",
-    system_instruction=prompt
-)
 
 # Configure ElevenLabs
 eleven_client = ElevenLabs(api_key="sk_15b715984c86cc485d18ec1cc8b756ce07d626c8113e95bb")
