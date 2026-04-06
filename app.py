@@ -91,7 +91,7 @@ if user_input:
 
     with st.chat_message("assistant"):
         with st.spinner("Megan is thinking..."):
-            reply = get_text_response(user_input, st.iframe[:-1])
+            reply = get_text_response(user_input, st.session_state.messages[:-1])
             st.write(reply)
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
