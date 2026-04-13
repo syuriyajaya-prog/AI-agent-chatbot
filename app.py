@@ -7,7 +7,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Hide streamlit default UI
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
@@ -16,12 +15,11 @@ st.markdown("""
     .block-container {padding: 0 !important; max-width: 100% !important;}
     [data-testid="stAppViewContainer"] {padding: 0 !important;}
     [data-testid="stVerticalBlock"] {gap: 0 !important;}
+    iframe {border: none !important;}
 </style>
 """, unsafe_allow_html=True)
 
-# Read the HTML file
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
-# Display the full website
-components.html(html_content, height=900, scrolling=True)
+components.html(html_content, height=5000, scrolling=True)
