@@ -19,7 +19,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; }
 
-/* LOGIN */
 #login-page { display: none; min-height: 100vh; background: var(--darker); position: relative; overflow: hidden; }
 #login-page.active { display: flex; align-items: center; justify-content: center; }
 .login-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(230,51,41,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(230,51,41,0.08) 0%, transparent 50%); }
@@ -43,7 +42,6 @@ body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(-
 .login-hint strong { color: var(--text); }
 .login-error { background: rgba(230,51,41,0.1); border: 1px solid rgba(230,51,41,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #ff6b6b; margin-bottom: 20px; display: none; }
 
-/* NAV */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 70px; display: flex; align-items: center; justify-content: space-between; }
 .nav-brand { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; cursor: pointer; }
 .nav-brand span { color: var(--red); }
@@ -56,10 +54,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgb
 .btn-logout { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 8px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
 .btn-logout:hover { border-color: var(--red); color: var(--red); }
 
-/* MAIN */
 #main-site { padding-top: 70px; }
 
-/* HERO */
 .hero { min-height: 90vh; display: flex; align-items: center; padding: 80px; position: relative; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(230,51,41,0.12) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(230,51,41,0.06) 0%, transparent 50%); }
 .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
@@ -80,13 +76,11 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgb
 .stat-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--red); line-height: 1; }
 .stat-card .label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
 
-/* SECTIONS */
 section { padding: 100px 80px; border-top: 1px solid var(--border); }
 .section-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-family: 'DM Mono', monospace; }
 .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 2px; line-height: 1; margin-bottom: 16px; }
 .section-sub { font-size: 16px; color: var(--muted); max-width: 500px; line-height: 1.7; margin-bottom: 60px; }
 
-/* SERVICES */
 .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 .service-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 36px; transition: border-color 0.3s, transform 0.3s; cursor: pointer; position: relative; overflow: hidden; }
 .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transition: transform 0.3s; }
@@ -98,7 +92,6 @@ section { padding: 100px 80px; border-top: 1px solid var(--border); }
 .service-price { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--red); letter-spacing: 1px; }
 .service-price span { font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--muted); letter-spacing: 0; }
 
-/* BOOKING */
 #booking-section { background: var(--darker); }
 .booking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
 .booking-form { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
@@ -119,7 +112,6 @@ section { padding: 100px 80px; border-top: 1px solid var(--border); }
 .info-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
 .info-item p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
-/* TABLE */
 .table-wrapper { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
 .table-header { padding: 20px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .table-header h3 { font-size: 16px; font-weight: 600; }
@@ -127,17 +119,17 @@ section { padding: 100px 80px; border-top: 1px solid var(--border); }
 .table-search:focus { border-color: var(--red); }
 table { width: 100%; border-collapse: collapse; }
 thead tr { background: #161616; border-bottom: 1px solid var(--border); }
-thead th { padding: 14px 28px; text-align: left; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+thead th { padding: 14px 20px; text-align: left; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 500; }
 tbody tr { border-bottom: 1px solid #1a1a1a; transition: background 0.15s; }
 tbody tr:hover { background: #161616; }
 tbody tr:last-child { border-bottom: none; }
-tbody td { padding: 16px 28px; font-size: 14px; }
+tbody td { padding: 14px 20px; font-size: 14px; }
 .badge { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 500; }
 .badge-green { background: rgba(34,197,94,0.1); color: #22c55e; }
 .badge-yellow { background: rgba(234,179,8,0.1); color: #eab308; }
 .badge-red { background: rgba(230,51,41,0.1); color: var(--red); }
+.plate { font-family: 'DM Mono', monospace; font-size: 13px; background: #1a1a1a; border: 1px solid var(--border); padding: 3px 10px; border-radius: 6px; color: var(--text); }
 
-/* FOOTER */
 footer { border-top: 1px solid var(--border); padding: 60px 80px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
 .footer-brand .brand { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 3px; margin-bottom: 12px; }
 .footer-brand .brand span { color: var(--red); }
@@ -148,7 +140,6 @@ footer { border-top: 1px solid var(--border); padding: 60px 80px; display: grid;
 .footer-bottom { border-top: 1px solid var(--border); padding: 24px 80px; display: flex; justify-content: space-between; align-items: center; }
 .footer-bottom p { font-size: 13px; color: var(--muted); }
 
-/* CHATBOT */
 .chat-fab { position: fixed; bottom: 32px; right: 32px; z-index: 9999; }
 .chat-btn { width: 64px; height: 64px; background: var(--red); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 8px 32px rgba(230,51,41,0.4); transition: transform 0.2s, box-shadow 0.2s; }
 .chat-btn:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(230,51,41,0.5); }
@@ -199,7 +190,6 @@ html { scroll-behavior: smooth; }
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login-page" class="active">
   <div class="login-bg"></div>
   <div class="login-grid"></div>
@@ -226,7 +216,6 @@ html { scroll-behavior: smooth; }
   </div>
 </div>
 
-<!-- MAIN SITE -->
 <div id="main-site" style="display:none;">
 <nav>
   <div class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">AUTO<span>CARE</span></div>
@@ -295,19 +284,22 @@ html { scroll-behavior: smooth; }
       </div>
       <div class="form-row">
         <div class="form-field"><label>Car Model</label><input type="text" id="book-car" placeholder="Perodua Myvi"></div>
-        <div class="form-field"><label>Year</label><input type="text" id="book-year" placeholder="2021"></div>
+        <div class="form-field"><label>Vehicle Number</label><input type="text" id="book-plate" placeholder="WXY 1234"></div>
       </div>
-      <div class="form-field">
-        <label>Service Package</label>
-        <select id="book-service">
-          <option value="">Select a package...</option>
-          <option>Basic Package — RM 99</option>
-          <option>Standard Package — RM 199</option>
-          <option>Premium Package — RM 349</option>
-          <option>Tyre Services — RM 60</option>
-          <option>Battery Replacement — RM 180</option>
-          <option>AC Service — RM 120</option>
-        </select>
+      <div class="form-row">
+        <div class="form-field"><label>Year</label><input type="text" id="book-year" placeholder="2021"></div>
+        <div class="form-field">
+          <label>Service Package</label>
+          <select id="book-service">
+            <option value="">Select a package...</option>
+            <option>Basic Package — RM 99</option>
+            <option>Standard Package — RM 199</option>
+            <option>Premium Package — RM 349</option>
+            <option>Tyre Services — RM 60</option>
+            <option>Battery Replacement — RM 180</option>
+            <option>AC Service — RM 120</option>
+          </select>
+        </div>
       </div>
       <div class="form-row">
         <div class="form-field"><label>Preferred Date</label><input type="date" id="book-date"></div>
@@ -331,10 +323,21 @@ html { scroll-behavior: smooth; }
   <div class="table-wrapper">
     <div class="table-header">
       <h3>Customer Records</h3>
-      <input class="table-search" placeholder="🔍  Search by name or car..." oninput="filterTable(this.value)">
+      <input class="table-search" placeholder="🔍  Search name, car or plate..." oninput="filterTable(this.value)">
     </div>
     <table>
-      <thead><tr><th>Name</th><th>Car Model</th><th>Year</th><th>Last Service</th><th>Next Service</th><th>Package</th><th>Status</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Vehicle No.</th>
+          <th>Car Model</th>
+          <th>Year</th>
+          <th>Last Service</th>
+          <th>Next Service</th>
+          <th>Package</th>
+          <th>Status</th>
+        </tr>
+      </thead>
       <tbody id="db-body"></tbody>
     </table>
   </div>
@@ -363,7 +366,6 @@ html { scroll-behavior: smooth; }
 </div>
 </div>
 
-<!-- CHATBOT -->
 <div class="chat-fab" id="chat-fab" style="display:none;">
   <div class="chat-window" id="chat-window">
     <div class="chat-head">
@@ -394,8 +396,7 @@ html { scroll-behavior: smooth; }
   </div>
   <button class="chat-btn" onclick="toggleChat()">💬</button>
 </div>
- 
-<!-- MODAL -->
+
 <div class="modal-overlay" id="booking-modal">
   <div class="modal">
     <div class="modal-icon">✅</div>
@@ -406,6 +407,7 @@ html { scroll-behavior: smooth; }
     <button class="btn-modal" onclick="closeModal()">Done</button>
   </div>
 </div>
+
 <script>
 const GROQ_API_KEY = "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";
 
@@ -434,40 +436,30 @@ Battery: Test annually after year 2, lasts 2-4 years
 
 CANCELLATION
 More than 24 hours: Free | 12-24 hours: RM 20 fee | Less than 12 hours: RM 50 fee
-Rescheduling: Free up to 2 times, must be done 6 hours before appointment
+Rescheduling: Free up to 2 times, must be done 6 hours before
 
 WARRANTY
 OEM parts: 12 months or 20,000km | Aftermarket: 6 months or 10,000km | Labour: 3 months | Battery: 24 months
 
-EMERGENCY ROADSIDE: 1800-88-ROAD (7623) | Available 24/7 | Free towing within 30km | RM 3/km after
+EMERGENCY ROADSIDE: 1800-88-ROAD (7623) | Available 24/7 | Free towing within 30km
 
 LOYALTY PROGRAM
-Earn 1 point per RM 1 spent | 100 points = RM 5 discount | Points valid 24 months
-Silver (0-2000pts): 5% off labour
-Gold (2001-6000pts): 10% off labour + priority booking
-Platinum (6001+pts): 15% off all services + free courtesy car
+Earn 1 point per RM 1 | 100 points = RM 5 discount | Points valid 24 months
+Silver (0-2000pts): 5% off | Gold (2001-6000pts): 10% off | Platinum (6001+pts): 15% off + free courtesy car
 
 FLEET ACCOUNTS: Min 5 vehicles | 10-15% discount | Contact fleet@autocare.com.my
-
-VEHICLE DROP-OFF
-Arrive 10 minutes before slot | SMS/email notification when ready
-After-hours collection available | Free storage first 24 hours then RM 30/day
-Courtesy car for Premium Package customers subject to availability
-
-CUSTOMER SUPPORT
-Complaints: feedback@autocare.com.my | Response within 1 business day
-Max 50% labour refund for unsatisfactory service
 `;
 
+// ======= DATABASE WITH VEHICLE NUMBER =======
 const database = [
- { id:1, name:"Suganantha", email:"suganantha@email.com", password:"password123", car:"BMW", year:"2020", lastService:"2025-10-15", nextService:"2026-04-15", package:"Standard Package", status:"Due Soon" },
-  { id:2, name:"Jayasyuriya", email:"jayasyuriya@gmail.com", password:"jaya123", car:"Honda City", year:"2022", lastService:"2025-12-01", nextService:"2026-06-01", package:"Premium Package", status:"OK" },
-  { id:3, name:"Lim Wei Jie", email:"lim@email.com", password:"lim123", car:"Toyota Vios", year:"2019", lastService:"2025-08-20", nextService:"2026-02-20", package:"Basic Package", status:"Overdue" },
-  { id:4, name:"Divyasri", email:"divyasri@gmail.com", password:"divya123", car:"Proton X50", year:"2023", lastService:"2026-01-10", nextService:"2026-07-10", package:"Premium Package", status:"OK" },
-  { id:5, name:"Mohd Faizal", email:"faizal@email.com", password:"faizal123", car:"Mazda CX-5", year:"2021", lastService:"2025-11-05", nextService:"2026-05-05", package:"Standard Package", status:"Due Soon" },
-  { id:6, name:"Tan Mei Ling", email:"tan@email.com", password:"tan123", car:"Perodua Axia", year:"2018", lastService:"2025-07-30", nextService:"2026-01-30", package:"Basic Package", status:"Overdue" },
-  { id:7, name:"Rajesh Kumar", email:"rajesh@email.com", password:"rajesh123", car:"Honda Jazz", year:"2020", lastService:"2025-12-20", nextService:"2026-06-20", package:"Standard Package", status:"OK" },
-  { id:8, name:"Nurul Ain", email:"nurul@email.com", password:"nurul123", car:"Proton Saga", year:"2022", lastService:"2026-02-01", nextService:"2026-08-01", package:"Basic Package", status:"OK" },
+  { name:"Suganantha",    email:"suganantha@email.com",  password:"password123", plate:"WXY 1234", car:"BMW", year:"2020", lastService:"2025-10-15", nextService:"2026-04-15", package:"Standard Package", status:"Due Soon" },
+  { name:"Jayasyuriya", email:"jayasyuriya@email.com",   password:"password123",     plate:"BCD 5678", car:"Honda City",   year:"2022", lastService:"2025-12-01", nextService:"2026-06-01", package:"Premium Package", status:"OK" },
+  { name:"Lim Wei Jie",    email:"lim@email.com",    password:"lim123",      plate:"JKL 9012", car:"Toyota Vios",  year:"2019", lastService:"2025-08-20", nextService:"2026-02-20", package:"Basic Package",   status:"Overdue" },
+  { name:"Divyasri", email:"divya@email.com",  password:"divya123",    plate:"PQR 3456", car:"Proton X50",   year:"2023", lastService:"2026-01-10", nextService:"2026-07-10", package:"Premium Package", status:"OK" },
+  { name:"Mohd Faizal",    email:"faizal@email.com", password:"faizal123",   plate:"VWX 7890", car:"Mazda CX-5",   year:"2021", lastService:"2025-11-05", nextService:"2026-05-05", package:"Standard Package",status:"Due Soon" },
+  { name:"Tan Mei Ling",   email:"tan@email.com",    password:"tan123",      plate:"EFG 2345", car:"Perodua Axia", year:"2018", lastService:"2025-07-30", nextService:"2026-01-30", package:"Basic Package",   status:"Overdue" },
+  { name:"Rajesh Kumar",   email:"rajesh@email.com", password:"rajesh123",   plate:"MNO 6789", car:"Honda Jazz",   year:"2020", lastService:"2025-12-20", nextService:"2026-06-20", package:"Standard Package",status:"OK" },
+  { name:"Nurul Ain",      email:"nurul@email.com",  password:"nurul123",    plate:"STU 1357", car:"Proton Saga",  year:"2022", lastService:"2026-02-01", nextService:"2026-08-01", package:"Basic Package",   status:"OK" },
 ];
 
 let currentUser = null;
@@ -508,8 +500,11 @@ function renderTable(data) {
   document.getElementById('db-body').innerHTML = data.map(r => `
     <tr>
       <td><strong>${r.name}</strong></td>
-      <td>${r.car}</td><td>${r.year}</td>
-      <td>${r.lastService}</td><td>${r.nextService}</td>
+      <td><span class="plate">${r.plate}</span></td>
+      <td>${r.car}</td>
+      <td>${r.year}</td>
+      <td>${r.lastService}</td>
+      <td>${r.nextService}</td>
       <td>${r.package}</td>
       <td>${r.status==='OK'?'<span class="badge badge-green">OK</span>':r.status==='Due Soon'?'<span class="badge badge-yellow">Due Soon</span>':'<span class="badge badge-red">Overdue</span>'}</td>
     </tr>
@@ -519,27 +514,29 @@ function renderTable(data) {
 function filterTable(q) {
   renderTable(database.filter(r =>
     r.name.toLowerCase().includes(q.toLowerCase()) ||
-    r.car.toLowerCase().includes(q.toLowerCase())
+    r.car.toLowerCase().includes(q.toLowerCase()) ||
+    r.plate.toLowerCase().includes(q.toLowerCase())
   ));
 }
 
 function handleBooking() {
-  const name=document.getElementById('book-name').value.trim();
-  const phone=document.getElementById('book-phone').value.trim();
-  const car=document.getElementById('book-car').value.trim();
-  const service=document.getElementById('book-service').value;
-  const date=document.getElementById('book-date').value;
-  const time=document.getElementById('book-time').value;
-  if(!name||!phone||!car||!service||!date||!time){alert('Please fill in all required fields.');return;}
+  const name    = document.getElementById('book-name').value.trim();
+  const phone   = document.getElementById('book-phone').value.trim();
+  const car     = document.getElementById('book-car').value.trim();
+  const plate   = document.getElementById('book-plate').value.trim();
+  const service = document.getElementById('book-service').value;
+  const date    = document.getElementById('book-date').value;
+  const time    = document.getElementById('book-time').value;
+  if(!name||!phone||!car||!plate||!service||!date||!time){alert('Please fill in all required fields.');return;}
   const ref='AC-'+Math.floor(100000+Math.random()*900000);
   document.getElementById('modal-ref').textContent=`REF: ${ref}`;
-  document.getElementById('modal-details').textContent=`${name} · ${car} · ${service} · ${date} at ${time}`;
+  document.getElementById('modal-details').textContent=`${name} · ${plate} · ${car} · ${service} · ${date} at ${time}`;
   document.getElementById('booking-modal').classList.add('open');
 }
 
 function closeModal() {
   document.getElementById('booking-modal').classList.remove('open');
-  ['book-name','book-phone','book-car','book-year','book-notes'].forEach(id=>document.getElementById(id).value='');
+  ['book-name','book-phone','book-car','book-plate','book-year','book-notes'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('book-service').value='';
   document.getElementById('book-date').value='';
   document.getElementById('book-time').value='';
