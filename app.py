@@ -22,4 +22,4 @@ st.markdown("""
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
 
-components.html(html_content, height=900, scrolling=True)
+components.html(html_content, height=5000, scrolling=True)
