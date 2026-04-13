@@ -21,5 +21,5 @@ st.markdown("""
  
 with open("index.html", "r", encoding="utf-8") as f:
     html_content = f.read()
- 
-components.html(html_content, height=8000, scrolling=False)
+# Display the full website
+components.html(html_content, height=900, scrolling=True)
