@@ -15,8 +15,7 @@ st.markdown("""
     .block-container {padding: 0 !important; max-width: 100% !important;}
     [data-testid="stAppViewContainer"] {padding: 0 !important;}
     [data-testid="stVerticalBlock"] {gap: 0 !important;}
-    iframe {border: none !important; display: block;}
-    .stApp {background: #0a0a0a;}
+   
 </style>
 """, unsafe_allow_html=True)
  
