@@ -1,0 +1,58 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 918 >>
+stream
+BT
+/F1 14 Tf
+50 750 Td
+(KAVIPRIYA A/P TANGARAJU - FULL STACK DEVELOPER) Tj
+/F1 10 Tf
+0 -24 Td
+(Email: kavipriya@email.com | Phone: +6017-9876543 | Location: Kuala Lumpur, Malaysia) Tj
+0 -16 Td
+(SUMMARY: Full Stack Web Developer with 2.5 years experience in JavaScript, React, and RESTful APIs.) Tj
+0 -16 Td
+(Solid database design skills in SQL databases and version control with Git.) Tj
+0 -16 Td
+(EXPERIENCE:) Tj
+0 -16 Td
+(- Web Application Developer at Nova Solutions \(2023 - Present\)) Tj
+0 -16 Td
+(  Designed responsive web frontend and integrated RESTful APIs.) Tj
+0 -16 Td
+(  Optimized SQL queries and maintained Git repositories.) Tj
+0 -16 Td
+(  Practiced Agile software development with sprint retrospectives.) Tj
+0 -16 Td
+(EDUCATION: BSc \(Hons\) in Software Engineering - Universiti Sains Malaysia \(2023\)) Tj
+0 -16 Td
+(SKILLS: JavaScript, React, SQL, Git, RESTful API, Agile, HTML5, CSS3) Tj
+0 -16 Td
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000115 00000 n
+0000000241 00000 n
+0000001210 00000 n
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1280
+%%EOF
