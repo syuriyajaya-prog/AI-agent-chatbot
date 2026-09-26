@@ -1,0 +1,120 @@
+// Prisma Schema for HireSense (PostgreSQL / Supabase)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  email              String             @unique
+  role               String             @default("HR User") // "Administrator" | "HR User"
+  is_active          Boolean            @default(true)
+  created_at         DateTime           @default(now()) @db.Timestamptz(6)
+  last_login         DateTime?          @db.Timestamptz(6)
+
+  jobs               Job[]              @relation("UserJobs")
+  screening_sessions ScreeningSession[] @relation("UserSessions")
+  audit_logs         AuditLog[]         @relation("UserAuditLogs")
+
+  @@map("users")
+}
+
+model Job {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title              String
+  description        String
+  created_by         String?            @db.Uuid
+  created_at         DateTime           @default(now()) @db.Timestamptz(6)
+  is_active          Boolean            @default(true)
+
+  creator            User?              @relation("UserJobs", fields: [created_by], references: [id], onDelete: SetNull)
+  screening_sessions ScreeningSession[]
+  screening_results  ScreeningResult[]
+
+  @@map("jobs")
+}
+
+model ScreeningSession {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id             String             @db.Uuid
+  run_by             String?            @db.Uuid
+  created_at         DateTime           @default(now()) @db.Timestamptz(6)
+
+  job                Job                @relation(fields: [job_id], references: [id], onDelete: Cascade)
+  runner             User?              @relation("UserSessions", fields: [run_by], references: [id], onDelete: SetNull)
+  results            ScreeningResult[]
+
+  @@map("screening_sessions")
+}
+
+model ScreeningResult {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  session_id         String             @db.Uuid
+  job_id             String             @db.Uuid
+  candidate_name     String
+  filename           String
+  score              Decimal            @db.Decimal
+  matched_skills     Json               @default("[]")
+  missing_skills     Json               @default("[]")
+  experience         String?
+  education          String?
+  summary            String?
+  recommendation     String?            // "Highly Recommended" | "Recommended" | "Consider" | "Not Recommended"
+  rank               Int?
+  created_at         DateTime           @default(now()) @db.Timestamptz(6)
+
+  session            ScreeningSession      @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  job                Job                   @relation(fields: [job_id], references: [id], onDelete: Cascade)
+  candidate_email    String?
+  candidate_phone    String?
+  certifications     Json                  @default("[]")
+  hr_decision        String?               @default("Pending") // "Shortlisted" | "Review Later" | "Rejected" | "Pending"
+  hr_notes           String?
+  hr_decided_by      String?
+  hr_decided_at      DateTime?             @db.Timestamptz(6)
+  communication_status String              @default("Not Sent") // "Not Sent" | "Sent" | "Failed"
+  last_communication_type String?
+  last_communication_at DateTime?          @db.Timestamptz(6)
+  communications     CommunicationRecord[]
+
+  @@map("screening_results")
+}
+
+model CommunicationRecord {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id       String             @db.Uuid
+  candidate_name     String
+  recipient          String
+  sender_id          String?            @db.Uuid
+  sender_name        String
+  email_type         String             // "Shortlisted Notification" | "Rejection Notification" | "Interview Invitation" | "Application Under Review" | "Custom Email"
+  subject            String
+  body               String
+  status             String             @default("Sent") // "Sent" | "Failed" | "Not Sent"
+  delivery_mode      String             @default("development_mock") // "development_mock" | "smtp_live"
+  sent_at            DateTime           @default(now()) @db.Timestamptz(6)
+
+  result             ScreeningResult    @relation(fields: [candidate_id], references: [id], onDelete: Cascade)
+
+  @@map("communication_records")
+}
+
+model AuditLog {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id            String?            @db.Uuid
+  user_name          String?
+  action             String
+  details            String?
+  ip_address         String?
+  created_at         DateTime           @default(now()) @db.Timestamptz(6)
+
+  user               User?              @relation("UserAuditLogs", fields: [user_id], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}

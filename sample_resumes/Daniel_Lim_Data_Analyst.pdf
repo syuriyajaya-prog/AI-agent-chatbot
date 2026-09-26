@@ -1,0 +1,58 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 992 >>
+stream
+BT
+/F1 14 Tf
+50 750 Td
+(DANIEL LIM KOK LEONG - DATA ANALYST) Tj
+/F1 10 Tf
+0 -24 Td
+(Email: daniel.lim@email.com | Phone: +6019-1122334 | Location: Kedah, Malaysia) Tj
+0 -16 Td
+(SUMMARY: Analytical Data Analyst with 2 years practical experience in Python, SQL, and Excel.) Tj
+0 -16 Td
+(Experienced in business intelligence reporting, data cleaning, and dashboard design using Tableau and Power BI.) Tj
+0 -16 Td
+(EXPERIENCE:) Tj
+0 -16 Td
+(- Junior Data Analyst at Apex Analytics \(2024 - Present\)) Tj
+0 -16 Td
+(  Conducted statistical analysis and automated data cleaning pipelines with Python.) Tj
+0 -16 Td
+(  Built executive dashboards in Tableau and Power BI for decision support.) Tj
+0 -16 Td
+(  Extracted large datasets using complex SQL queries and Excel pivot models.) Tj
+0 -16 Td
+(EDUCATION: Bachelor of Science in Information Systems - AIMST University \(2024\)) Tj
+0 -16 Td
+(SKILLS: Python, SQL, Microsoft Excel, Tableau, Power BI, Statistical Analysis, Data Cleaning) Tj
+0 -16 Td
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000115 00000 n
+0000000241 00000 n
+0000001284 00000 n
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1354
+%%EOF
