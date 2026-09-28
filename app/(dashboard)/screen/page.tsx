@@ -163,9 +163,31 @@ export default function ScreenPage() {
 
       clearInterval(interval);
 
+      const contentType = res.headers.get('content-type') || '';
+
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || 'Screening request failed');
+        let errorMessage = `Screening failed (HTTP ${res.status})`;
+        if (contentType.includes('application/json')) {
+          try {
+            const errorData = await res.json();
+            errorMessage = errorData.error || errorMessage;
+          } catch (e) {
+            errorMessage = `HTTP ${res.status}: ${res.statusText}`;
+          }
+        } else {
+          if (res.status === 413) {
+            errorMessage = 'Payload size exceeded limit. Please upload fewer or smaller PDF files per batch.';
+          } else if (res.status === 504) {
+            errorMessage = 'Screening timed out. Please upload fewer resumes per batch.';
+          } else {
+            errorMessage = `Server error (${res.status} ${res.statusText}). Please check server logs.`;
+          }
+        }
+        throw new Error(errorMessage);
+      }
+
+      if (!contentType.includes('application/json')) {
+        throw new Error(`Unexpected server response format (${res.status}). Expected JSON.`);
       }
 
       const data = await res.json();

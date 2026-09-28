@@ -9,6 +9,8 @@ import {
   FileSearch,
   Award,
   Briefcase,
+  Mail,
+  History,
   Shield,
   LogOut,
   Menu,
@@ -71,6 +73,16 @@ export default function DashboardLayout({
       href: '/jobs',
       icon: Briefcase,
     },
+    {
+      name: 'Candidate Communication',
+      href: '/communication',
+      icon: Mail,
+    },
+    {
+      name: 'Communication History',
+      href: '/communication-history',
+      icon: History,
+    },
     ...(user.role === 'Administrator'
       ? [
           {
@@ -88,6 +100,8 @@ export default function DashboardLayout({
     if (pathname.startsWith('/screen')) return { title: 'Screen Resumes', badge: 'AI Screening Engine' };
     if (pathname.startsWith('/results')) return { title: 'Screening Results', badge: 'Candidate Rankings' };
     if (pathname.startsWith('/jobs')) return { title: 'Job Descriptions', badge: 'Talent Profiles' };
+    if (pathname.startsWith('/communication-history')) return { title: 'Communication History', badge: 'Recruitment Audit Log' };
+    if (pathname.startsWith('/communication')) return { title: 'Candidate Communication', badge: 'Dispatch Console' };
     if (pathname.startsWith('/admin')) return { title: 'Admin Panel', badge: 'System Governance' };
     return { title: 'Recruitment Analytics Dashboard', badge: 'Decision Support' };
   };

@@ -3,7 +3,7 @@ const path = require('path');
 
 const rootDir = path.join(__dirname, '..');
 const downloadsDir = path.join(rootDir, 'public', 'downloads');
-const artifactDocPath = 'C:\\Users\\Acer\\.gemini\\antigravity-ide\\brain\\ce56dd03-8f83-40c2-b991-c1d8859ddc68\\HireSense_Complete_Source_Code.md';
+const artifactDocPath = process.env.ARTIFACT_DOC_PATH || path.join(downloadsDir, 'HireSense_Complete_Source_Code.md');
 
 fs.mkdirSync(downloadsDir, { recursive: true });
 
@@ -171,12 +171,13 @@ const mdOutPath = path.join(downloadsDir, 'HireSense_Complete_Source_Code.md');
 fs.writeFileSync(mdOutPath, mdContent, 'utf-8');
 console.log(`Exported Markdown: ${mdOutPath} (${totalLines} lines across ${fileDetails.length} files)`);
 
-// Also save directly into artifacts directory
-try {
-  fs.writeFileSync(artifactDocPath, mdContent, 'utf-8');
-  console.log(`Saved to artifact path: ${artifactDocPath}`);
-} catch (e) {
-  console.warn('Could not write artifact doc directly:', e.message);
+if (process.env.ARTIFACT_DOC_PATH) {
+  try {
+    fs.writeFileSync(artifactDocPath, mdContent, 'utf-8');
+    console.log(`Saved to artifact path: ${artifactDocPath}`);
+  } catch (e) {
+    console.warn('Could not write artifact doc directly:', e.message);
+  }
 }
 
 // Build Standalone Styled HTML Document (Printable / Save as PDF)
