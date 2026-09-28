@@ -195,13 +195,13 @@ export default function CandidateDetailPage() {
             <Shield className="w-3.5 h-3.5 text-[#4F46E5]" />
             <span>Make Decision</span>
           </button>
-          <button
-            onClick={() => setIsEmailModalOpen(true)}
+          <Link
+            href={`/communication/${candidate.id}`}
             className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer"
           >
             <Send className="w-3.5 h-3.5" />
-            <span>Send Email</span>
-          </button>
+            <span>Communicate with Candidate</span>
+          </Link>
         </div>
       </div>
 
