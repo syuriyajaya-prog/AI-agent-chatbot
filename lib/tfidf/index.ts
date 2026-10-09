@@ -1,8 +1,25 @@
-import natural from 'natural';
+// Direct sub-module imports to avoid triggering natural's SentimentAnalyzer require('afinn-165') ESM issue in Vercel/serverless environments
+// eslint-disable-next-line
+const { TfIdf } = require('natural/lib/natural/tfidf');
+// eslint-disable-next-line
+const { WordTokenizer } = require('natural/lib/natural/tokenizers');
 
 // Common English stopwords
+const DEFAULT_STOPWORDS = [
+  'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', 'as', 'at',
+  'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can', 'could',
+  'did', 'do', 'does', 'doing', 'down', 'during', 'each', 'few', 'for', 'from', 'further', 'had', 'has',
+  'have', 'having', 'he', 'her', 'here', 'hers', 'herself', 'him', 'himself', 'his', 'how', 'i', 'if',
+  'in', 'into', 'is', 'it', 'its', 'itself', 'just', 'me', 'more', 'most', 'my', 'myself', 'no', 'nor',
+  'not', 'now', 'of', 'off', 'on', 'once', 'only', 'or', 'other', 'our', 'ours', 'ourselves', 'out',
+  'over', 'own', 'same', 'she', 'should', 'so', 'some', 'such', 'than', 'that', 'the', 'their', 'theirs',
+  'them', 'themselves', 'then', 'there', 'these', 'they', 'this', 'those', 'through', 'to', 'too', 'under',
+  'until', 'up', 'very', 'was', 'we', 'were', 'what', 'when', 'where', 'which', 'while', 'who', 'whom',
+  'why', 'will', 'with', 'would', 'you', 'your', 'yours', 'yourself', 'yourselves'
+];
+
 const STOPWORDS = new Set([
-  ...natural.stopwords,
+  ...DEFAULT_STOPWORDS,
   'and', 'the', 'is', 'in', 'at', 'of', 'a', 'an', 'to', 'for', 'with', 'on', 'as',
   'by', 'this', 'that', 'it', 'from', 'or', 'be', 'are', 'was', 'were', 'will',
   'have', 'has', 'had', 'been', 'can', 'could', 'should', 'would', 'do', 'does',
@@ -28,9 +45,14 @@ export function preprocessText(text: string): string[] {
     .replace(/[^a-z0-9+#.\s]/g, ' ') // Keep technical symbols like c++, c#, .net
     .replace(/\s+/g, ' ');
 
-  // Tokenize using natural WordTokenizer
-  const tokenizer = new natural.WordTokenizer();
-  const tokens = tokenizer.tokenize(cleaned) || [];
+  // Tokenize using natural WordTokenizer or regex fallback
+  let tokens: string[] = [];
+  try {
+    const tokenizer = new WordTokenizer();
+    tokens = tokenizer.tokenize(cleaned) || [];
+  } catch (e) {
+    tokens = cleaned.split(/\s+/);
+  }
 
   // Filter stopwords and short tokens
   return tokens
@@ -64,7 +86,7 @@ export function computeTfIdfCosineSimilarity(
   }
 
   // Create Natural TfIdf instance
-  const tfidf = new natural.TfIdf();
+  const tfidf = new TfIdf();
 
   // Doc 0: Job Description
   tfidf.addDocument(jobTokens);
@@ -84,7 +106,7 @@ export function computeTfIdfCosineSimilarity(
     let jobWeight = 0;
     let resumeWeight = 0;
 
-    tfidf.tfidfs(term, (docIndex, measure) => {
+    tfidf.tfidfs(term, (docIndex: number, measure: number) => {
       if (docIndex === 0) jobWeight = measure;
       if (docIndex === 1) resumeWeight = measure;
     });
